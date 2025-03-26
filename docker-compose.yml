@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   server:
     build:
@@ -8,7 +6,8 @@ services:
       - "3000:3000" # Expose server on host machine
     volumes:
       - ./server-side:/app
-    command: npm run dev
+      - /app/node_modules # Exclude node_modules from being overwritten
+    command: npm start # Use npm start for production
 
   client:
     build:

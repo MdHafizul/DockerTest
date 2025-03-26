@@ -1,8 +1,11 @@
-# Use an Nginx image as the base image
+# Use Nginx to serve the static files
 FROM nginx:alpine
 
-# Copy the client-side files to the Nginx HTML directory
-COPY . /usr/share/nginx/html
+# Set the working directory
+WORKDIR /usr/share/nginx/html
+
+# Copy the static files to the Nginx HTML directory
+COPY . .
 
 # Expose the default Nginx port
 EXPOSE 80
