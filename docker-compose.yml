@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server-side
+    ports:
+      - "3000:3000" # Expose server on host machine
+    volumes:
+      - ./server-side:/app
+    command: npm run dev
+
+  client:
+    build:
+      context: ./client-side
+    ports:
+      - "8080:80" # Expose client on host machine
+    depends_on:
+      - server

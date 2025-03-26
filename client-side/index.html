@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Test</title>
+</head>
+
+<body>
+    <h1>Docker Test</h1>
+    <p>Random quote</p>
+    <button id="quote">Get Quote</button>
+    <p id="quote-text"></p>
+
+    <!-- Load config before main script -->
+    <script src="config.js"></script>
+    <script>
+        // Add event listener to the button
+        document.getElementById('quote').addEventListener('click', async () => {
+            const quoteText = document.getElementById('quote-text');
+
+            // Fetch the quote from the server using the API_BASE_URL
+            try {
+                const response = await fetch(`${config.API_BASE_URL}/api/quote`);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    quoteText.innerText = data.quote;
+                } else {
+                    quoteText.innerText = 'Error getting quote';
+                }
+            } catch (error) {
+                quoteText.textContent = 'Failed to fetch quote. Please try again.';
+                console.error('Error fetching quote:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>
